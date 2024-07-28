@@ -1,0 +1,128 @@
+@font-face {
+    font-family: 'Sohne';
+    src: url('fonts/sohne-font-family/TestSohneBreit-Extraleicht-BF663d89cd9eb84.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body{
+    font-family: 'Sohne', 'Times New Roman', sans-serif; 
+    margin: 0;
+    padding: 0;
+    background-color:white;
+    transition: background-color 0.5s ease;
+}
+
+header{
+    background-color: white;
+    color: black;
+    text-align: center;
+    padding: 1rem;
+    position: fixed;
+    width:100%;
+    top: 0;
+    z-index: 1000;
+    transition: background-color 0.5s ease;
+}
+
+main{
+    padding-top: 60px;
+}
+
+.image-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100vh;
+    padding: 2rem;
+    box-sizing: border-box;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.image-caption{
+    flex: 1;
+    padding-right: 2rem;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    max-width: 40%;
+}
+
+.image-wrapper{
+    flex: 2;
+    display: flex;
+    justify-content: flex-end;
+    overflow: hidden;
+}
+
+.image-wrapper img{
+    max-width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+    border: none;
+    outline: none;
+    transform: translateX(100%); /* Image starts at right*/
+    transition: transform 0.5s ease-in-out;
+}
+
+.image-container.visible .image-wrapper img{
+    transform: translateX(0); /* Image move to original position when visible */
+}
+
+
+.scroll-indicator {
+    position: fixed;
+    bottom: 15px; 
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px; 
+    height: 35px;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+}
+
+.scroll-indicator::before {
+    content: '';
+    position: absolute;
+    top: 6px;  
+    left: 50%;
+    width: 4px;  
+    height: 4px;  
+    background: #fff;
+    border-radius: 50%;
+    transform: translateX( -50%);
+    animation: scrollIndicate 2s infinite;
+}
+
+@keyframes scrollIndicate {
+    0% {top:6px; opacity: 1; }
+    50% {top:15px; opacity: 0.5;}  
+    100% {top:6px; opacity: 1;}
+}
+
+.scroll-message {
+    position: fixed;
+    bottom: 60px;  
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 8px 15px;  
+    border-radius: 15px; 
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.scroll-message.visible {
+    opacity: 1;
+}
+
+/* Hide scroll indicator and message when not at the top */
+.scrolled .scroll-indicator,
+.scrolled .scroll-message {
+    opacity: 0;
+    pointer-events: none;
+}
